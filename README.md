@@ -186,14 +186,15 @@ Examples"
 docker run --name diymiddleman -P -d curiousfokker/helium_diy_middleman:latest      
 ```
 ```bash
-docker run --name diymiddleman -P -d curiousfokker/helium_diy_middleman:latest \
+docker run \
     -e middleman_port=1681 \
     -e middleman_tx_adjust='--tx-adjust 0' \
     -e middleman_rx_adjust='--rx-adjust 0' \
     -e gateway_ID=AA555A0000000000 \
     -e server_address=localhost \
     -e serv_port_up=1680 \
-    -e serv_port_down=1680       
+    -e serv_port_down=1680 \
+    --name diymiddleman -P -d curiousfokker/helium_diy_middleman:latest
 ```    
 ## How It Works
 This software listens for UDP datagrams on the specified port (defaults to `1680`).  
