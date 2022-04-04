@@ -16,7 +16,7 @@ ENV serv_port_up=1680
 ENV serv_port_down=1680
 
 # Open Middleman Listening Ports
-EXPOSE ${middleman_port}:1681
+EXPOSE 1681:${middleman_port}
 #EXPOSE 1681
 
 # Update Packages
