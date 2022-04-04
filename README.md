@@ -181,9 +181,9 @@ settings.
   use double quotes when setting this variable.
   
 ### Docker Container Setup
-Examples"
+Examples:
 ```bash
-docker run --name diymiddleman -P -d curiousfokker/helium_diy_middleman:latest      
+docker run --name diymiddleman -P -td curiousfokker/helium_diy_middleman:latest      
 ```
 ```bash
 docker run \
@@ -194,7 +194,7 @@ docker run \
     -e server_address=localhost \
     -e serv_port_up=1680 \
     -e serv_port_down=1680 \
-    --name diymiddleman -P -d curiousfokker/helium_diy_middleman:latest
+    --name diymiddleman -P -td curiousfokker/helium_diy_middleman:latest
 ```    
 ## How It Works
 This software listens for UDP datagrams on the specified port (defaults to `1680`).  
