@@ -17,13 +17,13 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag simeononsecurity/helium_diy_middleman:latest
     - name: Login to DockerHub
-        - uses: docker/login-action@v1
-        - with:
+    - uses: docker/login-action@v1
+    - with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build and push
-        - uses: docker/build-push-action@v2
-        - with:
-            context: .
-            push: true
-            tags: simeononsecurity/helium_diy_middleman:latest
+    - uses: docker/build-push-action@v2
+    - with:
+          context: .
+          push: true
+          tags: simeononsecurity/helium_diy_middleman:latest
