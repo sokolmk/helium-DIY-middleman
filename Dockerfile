@@ -9,7 +9,7 @@ ENV middleman_tx_adjust='--tx-adjust 0'
 ENV middleman_rx_adjust='--rx-adjust 0'
 ENV middleman_ENVs="${middleman_tx_adjust} ${middleman_rx_adjust}"
 
-# Service Virtual Environment Variables
+# Service Virtual Gateway Variables
 ENV gateway_ID=AA555A0000000000
 ENV server_address=localhost
 ENV serv_port_up=1680
