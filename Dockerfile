@@ -46,7 +46,8 @@ RUN cat /home/middleman/configs/config.json && cat /home/middleman/middleman.con
 #Systemd broken in docker. Workarround is insecure
 #RUN systemctl enable middleman
 #RUN systemctl start middleman
-RUN python3 /home/middleman/gateways2miners.py -p ${middleman_port} -c /home/middleman/configs/ &
+RUN echo "python3 /home/middleman/gateways2miners.py -p ${middleman_port} -c /home/middleman/configs/" > ./middleman.sh
+RUN chmod +x ./middleman.sh
+RUN cat ./middleman.sh
 
-#keep image running
-CMD ["sleep", "infinity"]
+CMD ["/bin/bash", "./middleman.sh"]
