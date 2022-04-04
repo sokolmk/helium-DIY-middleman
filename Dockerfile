@@ -1,38 +1,50 @@
+#https://github.com/curiousfokker/helium-DIY-middleman.git
 FROM ubuntu:latest
 ENV DEBIAN_FRONTEND noninteractive
+ENV container docker
 
-# Service Specific Environment Variables
-ARG gateway_ID=AA555A0000000000
-ARG server_address=localhost
-ARG serv_port_up=1680
-ARG serv_port_down=1680
-ARG middleman_port=1681
+# Specify Middleman Environment Variables
+ENV middleman_port=1681
+ENV middleman_tx_adjust='--tx-adjust 0'
+ENV middleman_rx_adjust='--rx-adjust 0'
+ENV middleman_ENVs='middleman_ENVs\=\"${middleman_tx_adjust} ${middleman_rx_adjust}\"'
 
-# Reconfigure locale
-RUN locale-gen en_US.UTF-8 && dpkg-reconfigure locales
-
-# Update Packages
-RUN apt-get update && apt-get -y full-upgrade
-
-# Install Required Supporting Software
-RUN apt-get install -y git cmake make htop wget python3 python3-pip
-
-# Install Middle-Man
-RUN git clone https://github.com/curiousfokker/helium-DIY-middleman.git
-RUN cd /helium-DIY-middleman
-RUN sudo make install
-RUN rm /home/middleman/configs/*.json
-RUN echo '{
-        "gateway_conf": {
-                "gateway_ID": "${gateway_ID}",
-                "server_address": "${server_address}",
-                "serv_port_up": ${serv_port_up},
-                "serv_port_down": ${serv_port_down}
-         }
-}'> /home/middleman/configs/config.json
-RUN systemctl enable middleman
-RUN systemctl start middleman
+# Service Virtual Environment Variables
+ENV gateway_ID=AA555A0000000000
+ENV server_address=localhost
+ENV serv_port_up=1680
+ENV serv_port_down=1680
 
 # Open Middleman Listening Ports
 EXPOSE ${middleman_port}:1681
 #EXPOSE 1681
+
+# Update Packages
+RUN apt-get update && apt-get -y full-upgrade
+
+# Install Supporting Software
+RUN apt-get install -y git cmake make htop wget python3 python3-pip python-dev systemctl gcc curl gpg
+# Fix Python3-pip
+RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
+
+# Install Middle-Man
+RUN git clone https://github.com/curiousfokker/helium-DIY-middleman.git
+RUN cd /helium-DIY-middleman && make install
+#RUN rm /home/middleman/configs/*.json > /dev/null
+RUN echo " {\n"\
+         "  \"gateway_conf\": {\n" \
+         "      \"gateway_ID\": \"${gateway_ID}\",\n" \
+         "      \"server_address\": \"${server_address}\",\n" \
+         "      \"serv_port_up\": ${serv_port_up},\n" \
+         "      \"serv_port_down\": ${serv_port_down}\n" \
+         "    }\n"\
+         "  }\n" > /home/middleman/configs/config.json
+RUN echo "${middleman_ENVs}" > /home/middleman/middleman.conf
+RUN cat /home/middleman/configs/config.json && cat /home/middleman/middleman.conf
+
+# Start Middle-Man
+#Systemd broken in docker. Workarround is insecure
+#RUN systemctl enable middleman
+#RUN systemctl start middleman
+RUN python3 /home/middleman/gateways2miners.py -p ${middleman_port} -c /home/middleman/configs/ &
+
