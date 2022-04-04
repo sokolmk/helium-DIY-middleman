@@ -180,7 +180,21 @@ settings.
   Additional arguments to pass to middleman when running. Make sure to
   use double quotes when setting this variable.
   
- 
+### Docker Container Setup
+Examples"
+```bash
+docker run --name diymiddleman -P -d curiousfokker/helium_diy_middleman:latest      
+```
+```bash
+docker run --name diymiddleman -P -d curiousfokker/helium_diy_middleman:latest \
+    -e middleman_port=1681 \
+    -e middleman_tx_adjust='--tx-adjust 0' \
+    -e middleman_rx_adjust='--rx-adjust 0' \
+    -e gateway_ID=AA555A0000000000 \
+    -e server_address=localhost \
+    -e serv_port_up=1680 \
+    -e serv_port_down=1680       
+```    
 ## How It Works
 This software listens for UDP datagrams on the specified port (defaults to `1680`).  
 datagrams received on this port may be from gateways (PULL_DATA, PUSH_DATA, TX_ACK) or from miners (PULL_ACK, PUSH_ACK, PULL_RESP).
