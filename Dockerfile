@@ -7,7 +7,7 @@ ENV container docker
 ENV middleman_port=1681
 ENV middleman_tx_adjust='--tx-adjust 0'
 ENV middleman_rx_adjust='--rx-adjust 0'
-ENV middleman_ENVs='middleman_ENVs\=\"${middleman_tx_adjust} ${middleman_rx_adjust}\"'
+ENV middleman_ENVs="${middleman_tx_adjust} ${middleman_rx_adjust}"
 
 # Service Virtual Environment Variables
 ENV gateway_ID=AA555A0000000000
@@ -16,7 +16,7 @@ ENV serv_port_up=1680
 ENV serv_port_down=1680
 
 # Open Middleman Listening Ports
-EXPOSE 1681:${middleman_port}
+EXPOSE ${middleman_port}:${middleman_port}
 #EXPOSE 1681
 
 # Update Packages
@@ -30,7 +30,7 @@ RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
 # Install Middle-Man
 RUN git clone https://github.com/curiousfokker/helium-DIY-middleman.git
 RUN cd /helium-DIY-middleman && make install
-#RUN rm /home/middleman/configs/*.json > /dev/null
+RUN rm /home/middleman/configs/*.example > /dev/null
 RUN echo " {\n"\
          "  \"gateway_conf\": {\n" \
          "      \"gateway_ID\": \"${gateway_ID}\",\n" \
@@ -39,7 +39,7 @@ RUN echo " {\n"\
          "      \"serv_port_down\": ${serv_port_down}\n" \
          "    }\n"\
          "  }\n" > /home/middleman/configs/config.json
-RUN echo "${middleman_ENVs}" > /home/middleman/middleman.conf
+RUN echo "middleman_ENVs=\"${middleman_ENVs}\"" > /home/middleman/middleman.conf
 RUN cat /home/middleman/configs/config.json && cat /home/middleman/middleman.conf
 
 # Start Middle-Man
@@ -48,3 +48,5 @@ RUN cat /home/middleman/configs/config.json && cat /home/middleman/middleman.con
 #RUN systemctl start middleman
 RUN python3 /home/middleman/gateways2miners.py -p ${middleman_port} -c /home/middleman/configs/ &
 
+#keep image running
+CMD ["sleep", "infinity"]
