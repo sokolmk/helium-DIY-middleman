@@ -48,8 +48,8 @@ RUN rm /home/middleman/configs/*.example > /dev/null
 #Systemd broken in docker. Workarround is insecure
 #RUN systemctl enable middleman
 #RUN systemctl start middleman
-RUN echo "chmod +x helium-diy-middleman/dockersetup.sh" >> ./middleman.sh
-RUN echo "/bin/bash helium-diy-middleman/dockersetup.sh" >> ./middleman.sh
+RUN echo "chmod +x helium-DIY-middleman/dockersetup.sh" >> ./middleman.sh
+RUN echo "/bin/bash helium-DIY-middleman/dockersetup.sh" >> ./middleman.sh
 RUN echo "python3 /home/middleman/gateways2miners.py -p 1680 -c /home/middleman/configs/" >> ./middleman.sh
 
 CMD ["/bin/bash", "./middleman.sh"]
