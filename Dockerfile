@@ -33,6 +33,7 @@ RUN git clone https://github.com/simeononsecurity/helium-DIY-middleman.git
 RUN cd /helium-DIY-middleman && make install
 RUN rm /home/middleman/configs/*.example > /dev/null
 
+# Generating Config File at Build Time does not work. Moved to dockersetup.sh
 #RUN echo " {\n"\
 #         "  \"gateway_conf\": {\n" \
 #         "      \"gateway_ID\": \"${gateway_ID}\",\n" \
@@ -44,15 +45,10 @@ RUN rm /home/middleman/configs/*.example > /dev/null
 #RUN echo "middleman_ENVs=\"${middleman_ENVs}\"" > /home/middleman/middleman.conf
 #RUN cat /home/middleman/configs/config.json && cat /home/middleman/middleman.conf
 
-
 # Start Middle-Man
 #Systemd broken in docker. Workarround is insecure
 #RUN systemctl enable middleman
 #RUN systemctl start middleman
-RUN echo 'chmod +x /helium-DIY-middleman/dockersetup.sh' >> ./middleman.sh \
-&& echo '/bin/bash /helium-DIY-middleman/dockersetup.sh' >> ./middleman.sh \
-&& echo "python3 /home/middleman/gateways2miners.py -p 1680 -c /home/middleman/configs/" > ./middleman.sh
-RUN chmod +x ./middleman.sh
-RUN cat ./middleman.sh
-
-CMD ["/bin/bash"/bin/bash", "./middleman.sh"]
+RUN cd /helium-DIY-middleman/ && chmod +x ./dockersetup.sh
+RUN cd /helium-DIY-middleman/ && cat ./dockersetup.sh
+CMD ["/bin/bash", "/helium-DIY-middleman/dockersetup.sh"]
