@@ -187,6 +187,8 @@ docker run --name diymiddleman -P -td curiousfokker/helium_diy_middleman:latest
 ```
 ```bash
 docker run \
+    --net='bridge' \
+    -p 1681:1681 \
     -e middleman_port=1681 \
     -e middleman_tx_adjust='--tx-adjust 0' \
     -e middleman_rx_adjust='--rx-adjust 0' \
