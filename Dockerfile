@@ -43,15 +43,11 @@ RUN rm /home/middleman/configs/*.example > /dev/null
 #         "  }\n" > /home/middleman/configs/config.json
 #RUN echo "middleman_ENVs=\"${middleman_ENVs}\"" > /home/middleman/middleman.conf
 #RUN cat /home/middleman/configs/config.json && cat /home/middleman/middleman.conf
-CMD chmod +x /helium-diy-middleman/dockersetup.sh
-CMD /bin/bash /helium-diy-middleman/dockersetup.sh
 
 # Start Middle-Man
 #Systemd broken in docker. Workarround is insecure
 #RUN systemctl enable middleman
 #RUN systemctl start middleman
-RUN echo "python3 /home/middleman/gateways2miners.py -p 1680 -c /home/middleman/configs/" > ./middleman.sh
-RUN chmod +x ./middleman.sh
-RUN cat ./middleman.sh
-
-CMD ["/bin/bash", "./middleman.sh"]
+RUN echo "python3 /home/middleman/gateways2miners.py -p 1680 -c /home/middleman/configs/" >> /helium-diy-middleman/dockersetup.sh
+RUN chmod +x /helium-diy-middleman/dockersetup.sh
+CMD ["/bin/bash", "/helium-diy-middleman/dockersetup.sh"]
