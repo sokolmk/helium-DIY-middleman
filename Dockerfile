@@ -43,8 +43,8 @@ RUN rm /home/middleman/configs/*.example > /dev/null
 #         "  }\n" > /home/middleman/configs/config.json
 #RUN echo "middleman_ENVs=\"${middleman_ENVs}\"" > /home/middleman/middleman.conf
 #RUN cat /home/middleman/configs/config.json && cat /home/middleman/middleman.conf
-CMD echo 'chmod +x /helium-DIY-middleman/dockersetup.sh' > ./middleman.sh
-CMD echo '/bin/bash /helium-DIY-middleman/dockersetup.sh' > ./middleman.sh
+RUN echo 'chmod +x /helium-DIY-middleman/dockersetup.sh' >> ./middleman.sh
+RUN echo '/bin/bash /helium-DIY-middleman/dockersetup.sh' >> ./middleman.sh
 
 # Start Middle-Man
 #Systemd broken in docker. Workarround is insecure
