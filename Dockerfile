@@ -32,7 +32,7 @@ RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
 # Install Middle-Man
 RUN git clone https://github.com/simeononsecurity/helium-DIY-middleman.git
 RUN cd /helium-DIY-middleman && make install
-RUN rm /home/middleman/configs/*.example > /dev/null
+#RUN rm /home/middleman/configs/*.example > /dev/null
 
 #RUN echo " {\n"\
 #         "  \"gateway_conf\": {\n" \
