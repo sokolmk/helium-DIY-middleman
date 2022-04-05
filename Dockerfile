@@ -1,7 +1,9 @@
 #https://github.com/curiousfokker/helium-DIY-middleman.git
+
 FROM ubuntu:latest
 ENV DEBIAN_FRONTEND noninteractive
 ENV container docker
+VOLUME /home/middleman .
 
 # Specify Middleman Environment Variables
 ENV middleman_port=1681
