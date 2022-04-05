@@ -16,7 +16,7 @@ ENV serv_port_up=1680
 ENV serv_port_down=1680
 
 # Open Middleman Listening Ports
-EXPOSE 1680:${middleman_port}
+EXPOSE 1681:${middleman_port}
 #EXPOSE 1681
 
 # Update Packages
@@ -46,7 +46,7 @@ RUN cat /home/middleman/configs/config.json && cat /home/middleman/middleman.con
 #Systemd broken in docker. Workarround is insecure
 #RUN systemctl enable middleman
 #RUN systemctl start middleman
-RUN echo "python3 /home/middleman/gateways2miners.py -p 1680 -c /home/middleman/configs/" > ./middleman.sh
+RUN echo "python3 /home/middleman/gateways2miners.py -p 1681 -c /home/middleman/configs/" > ./middleman.sh
 RUN chmod +x ./middleman.sh
 RUN cat ./middleman.sh
 
