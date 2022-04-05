@@ -43,7 +43,7 @@ RUN rm /home/middleman/configs/*.example > /dev/null
 #         "  }\n" > /home/middleman/configs/config.json
 #RUN echo "middleman_ENVs=\"${middleman_ENVs}\"" > /home/middleman/middleman.conf
 #RUN cat /home/middleman/configs/config.json && cat /home/middleman/middleman.conf
-CMD ["/bin/bash", "chmod", "+x", "/home/middleman/dockersetup.sh"]
+CMD ["/bin/bash", "chmod", "+x", "/helium-diy-middleman/dockersetup.sh"]
 CMD ["/bin/bash", "/helium-diy-middleman/dockersetup.sh"]
 
 # Start Middle-Man
