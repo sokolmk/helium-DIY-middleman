@@ -17,7 +17,7 @@ ENV serv_port_up=1680
 ENV serv_port_down=1680
 
 # Open Middleman Listening Ports
-# Use "-p 1682:1682/udp" for example at run time instead
+# Use "-p 1681:1682/udp" for example at run time instead
 #EXPOSE ${middleman_port}:${middleman_port}/udp
 #EXPOSE 1681
 
