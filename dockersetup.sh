@@ -16,4 +16,4 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
 else
         echo "-- Not first container startup --"
 fi
-nice -15 python3 /home/middleman/gateways2miners.py -p ${middleman_port} -c /home/middleman/configs/
+python3 /home/middleman/gateways2miners.py -p ${middleman_port} -c /home/middleman/configs/
