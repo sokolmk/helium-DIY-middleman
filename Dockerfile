@@ -3,6 +3,7 @@
 FROM ubuntu:latest
 ENV DEBIAN_FRONTEND noninteractive
 ENV container docker
+ENV PATH="/usr/bin:${PATH}"
 
 # Specify Middleman Environment Variables
 ENV middleman_port=1681
@@ -21,8 +22,11 @@ ENV serv_port_down=1680
 #EXPOSE ${middleman_port}:${middleman_port}/udp
 #EXPOSE 1681
 
+# Echo Path
+RUN echo ${PATH}
+
 # Update Packages
-RUN apt-get update && apt-get install apt-utils && apt-get -y -f -m --show-progress full-upgrade
+RUN apt-get update && apt-get install -y apt-utils && apt-get -y -f -m --show-progress full-upgrade
 
 # Install Supporting Software
 RUN apt-get install -y git cmake make htop wget python3 python3-pip python-dev systemctl gcc curl gpg
