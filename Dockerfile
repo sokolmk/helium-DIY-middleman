@@ -30,8 +30,10 @@ RUN apt-get update && apt-get install -y apt-utils && apt-get -y -f -m --show-pr
 
 # Install Supporting Software
 RUN apt-get install -y git cmake make htop wget python3 python3-pip python-dev systemctl gcc curl gpg
-# Fix Python3-pip
-RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
+# Fix Python3 and Python3-pip
+RUN alternatives --set python /usr/bin/python3
+RUN python3 -m pip install --upgrade pip
+RUN python3 -m pip install --upgrade setuptools
 
 # Install Middle-Man
 RUN git clone https://github.com/simeononsecurity/helium-DIY-middleman.git
