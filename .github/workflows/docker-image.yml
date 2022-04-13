@@ -10,7 +10,7 @@ jobs:
 
   build:
 
-    runs-on: multiarch/ubuntu-core
+    runs-on: ubuntu-latest
     env:
       DOCKER_PLATFORMS: linux/amd64,linux/arm64
 
