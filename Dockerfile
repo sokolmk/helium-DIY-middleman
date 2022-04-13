@@ -22,12 +22,12 @@ ENV serv_port_down=1680
 #EXPOSE 1681
 
 # Update Packages
-RUN apt-get update && apt-get -y -f -m --show-progress full-upgrade || true
+RUN apt-get update && apt-get -y -f -m --show-progress full-upgrade
 
 # Install Supporting Software
-RUN apt-get install -y git cmake make htop wget python3 python3-pip python-dev systemctl gcc curl gpg || true
+RUN apt-get install -y git cmake make htop wget python3 python3-pip python-dev systemctl gcc curl gpg
 # Fix Python3-pip
-RUN wget https://bootstrap.pypa.io/get-pip.py || true && python3 get-pip.py || true 
+RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
 
 # Install Middle-Man
 RUN git clone https://github.com/simeononsecurity/helium-DIY-middleman.git
