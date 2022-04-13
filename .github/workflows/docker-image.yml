@@ -18,11 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker buildx install && \
-        docker buildx create --name mybuilder && \
-        docker buildx use mybuilder && \
-        docker run --rm --privileged multiarch/qemu-user-static:register --reset && \
-        docker buildx build --platform linux/amd64,linux/arm64 -t simeononsecurity/helium_diy_middleman:latest-arm64 --progress=plain --push .
+      run: docker buildx install && docker buildx create --name mybuilder && docker buildx use mybuilder && docker run --rm --privileged multiarch/qemu-user-static:register --reset && docker buildx build --platform linux/amd64,linux/arm64 -t simeononsecurity/helium_diy_middleman:latest-arm64 --progress=plain --push .
     -
         name: Login to DockerHub
         uses: docker/login-action@v1
