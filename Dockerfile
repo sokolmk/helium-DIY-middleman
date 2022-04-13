@@ -27,7 +27,7 @@ RUN apt-get update && apt-get -y -f -m --show-progress full-upgrade || true
 # Install Supporting Software
 RUN apt-get install -y git cmake make htop wget python3 python3-pip python-dev systemctl gcc curl gpg || true
 # Fix Python3-pip
-RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
+RUN wget https://bootstrap.pypa.io/get-pip.py || true && python3 get-pip.py || true
 
 # Install Middle-Man
 RUN git clone https://github.com/simeononsecurity/helium-DIY-middleman.git
