@@ -36,7 +36,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
     - 
       name: Build the Docker image
-      run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes && docker buildx install && docker buildx create --name multiarch --driver docker-container --use && docker buildx create --name arm --platform linux/amd64,linux/armhf,linux/arm64 --driver docker-container --use && docker buildx inspect arm --bootstrap && docker buildx use arm && docker run --rm --privileged multiarch/qemu-user-static:register --reset && docker buildx build --platform linux/amd64,linux/armhf,linux/arm64 -t simeononsecurity/helium_diy_middleman:latest --progress=plain --push .
+      run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes && docker buildx build --platform linux/amd64,linux/armhf,linux/arm64 -t simeononsecurity/helium_diy_middleman:latest --progress=plain --push .
     -
         name: Build and push
         uses: docker/build-push-action@v2
@@ -45,4 +45,4 @@ jobs:
           push: true
           tags: simeononsecurity/helium_diy_middleman:latest
 
-          
+          # && docker buildx install && docker buildx create --name multiarch --driver docker-container --use && docker buildx create --name arm --platform linux/amd64,linux/armhf,linux/arm64 --driver docker-container --use && docker buildx inspect arm --bootstrap && docker buildx use arm && docker run --rm --privileged multiarch/qemu-user-static:register --reset &&
