@@ -22,7 +22,7 @@ ENV serv_port_down=1680
 #EXPOSE 1681
 
 # Update Packages
-RUN apt-get update && apt-get -y full-upgrade --skip-broken --nobest ; exit 1
+RUN apt-get update && apt-get -y -f -m -b --with-new-pkgs --show-progress full-upgrade; exit 1
 
 # Install Supporting Software
 RUN apt-get install -y git cmake make htop wget python3 python3-pip python-dev systemctl gcc curl gpg
