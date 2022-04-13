@@ -1,6 +1,6 @@
 #https://github.com/curiousfokker/helium-DIY-middleman.git
 
-FROM ubuntu:latest
+FROM arm64v8/ubuntu:latest
 ENV DEBIAN_FRONTEND noninteractive
 ENV container docker
 
