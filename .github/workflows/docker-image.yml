@@ -10,7 +10,7 @@ jobs:
 
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest 
     env:
       DOCKER_PLATFORMS: linux/amd64,linux/armhf,linux/arm64
 
