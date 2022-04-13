@@ -44,5 +44,3 @@ jobs:
           context: .
           push: true
           tags: simeononsecurity/helium_diy_middleman:latest
-
-          # && docker buildx install && docker buildx create --name multiarch --driver docker-container --use && docker buildx create --name arm --platform linux/amd64,linux/armhf,linux/arm64 --driver docker-container --use && docker buildx inspect arm --bootstrap && docker buildx use arm && docker run --rm --privileged multiarch/qemu-user-static:register --reset &&
