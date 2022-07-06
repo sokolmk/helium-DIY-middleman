@@ -1,10 +1,10 @@
 #https://github.com/curiousfokker/helium-DIY-middleman.git
+FROM ubuntu:latest
 
 LABEL org.opencontainers.image.source="https://github.com/simeononsecurity/helium-DIY-middleman"
-LABEL org.opencontainers.image.description="Code here acts as a middleman between LoRa gateways running Semtech packet forwarders and servers ingesting packet forwarder data"
+LABEL org.opencontainers.image.description="Middleman between LoRa gateways running Semtech packet forwarders and servers ingesting packet forwarder data"
 LABEL org.opencontainers.image.authors="simeononsecurity"
 
-FROM ubuntu:latest
 ENV DEBIAN_FRONTEND noninteractive
 ENV container docker
 ENV PATH="/usr/bin:${PATH}"
