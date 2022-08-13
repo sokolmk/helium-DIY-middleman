@@ -17,7 +17,7 @@ ENV middleman_ENVs="${middleman_tx_adjust} ${middleman_rx_adjust}"
 
 # Service Virtual Environment Variables
 ENV gateway_ID=AA555A0000000000
-ENV server_address=localhost
+ENV server_address=127.0.0.1
 ENV serv_port_up=1680
 ENV serv_port_down=1680
 
@@ -25,7 +25,7 @@ ENV serv_port_down=1680
  #Use "-p 1681:1681/udp" for example at run time instead
 EXPOSE ${middleman_port}:${middleman_port}/udp
 EXPOSE 1681
-
+EXPOSE 1680
 # Echo Path
 RUN echo ${PATH}
 
