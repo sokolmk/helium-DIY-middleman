@@ -118,6 +118,9 @@ class GW2Miner:
                 self.handle_PULL_RESP(msg, addr)
             elif msg['_NAME_'] == messages.MsgPullData.NAME:
                 self.handle_PULL_DATA(msg, addr)
+            else
+                self.vgw_logger.info(f"received from {addr} {msg['_NAME_']}")
+
 
     def handle_PUSH_DATA(self, msg, addr=None):
         """
@@ -257,6 +260,9 @@ class GW2Miner:
             self.sock.sendto(ack, addr)
 
         return msg, addr
+
+    def handle_ACK(self,msg):
+
 
     def send_stats(self):
         """
