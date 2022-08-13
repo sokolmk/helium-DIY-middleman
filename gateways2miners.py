@@ -118,7 +118,7 @@ class GW2Miner:
                 self.handle_PULL_RESP(msg, addr)
             elif msg['_NAME_'] == messages.MsgPullData.NAME:
                 self.handle_PULL_DATA(msg, addr)
-            else
+            else:
                 self.vgw_logger.info(f"received from {addr} {msg['_NAME_']}")
 
 
