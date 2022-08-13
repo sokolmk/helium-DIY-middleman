@@ -260,9 +260,7 @@ class GW2Miner:
             self.sock.sendto(ack, addr)
 
         return msg, addr
-
-    def handle_ACK(self,msg):
-
+   
 
     def send_stats(self):
         """
