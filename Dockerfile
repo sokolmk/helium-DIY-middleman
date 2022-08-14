@@ -11,8 +11,8 @@ ENV PATH="/usr/bin:${PATH}"
 
 # Specify Middleman Environment Variables
 ENV middleman_port=1681
-ENV middleman_tx_adjust='--tx-adjust -15'
-ENV middleman_rx_adjust='--rx-adjust -20'
+ENV middleman_tx_adjust='--tx-adjust -25'
+ENV middleman_rx_adjust='--rx-adjust -35'
 ENV middleman_ENVs="${middleman_tx_adjust} ${middleman_rx_adjust}"
 
 # Service Virtual Environment Variables
