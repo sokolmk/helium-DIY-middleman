@@ -122,6 +122,8 @@ class GW2Miner:
                 self.vgw_logger.info(f"received from {addr} {msg['_NAME_']}")
 
 
+
+
     def handle_PUSH_DATA(self, msg, addr=None):
         """
         take PUSH_DATA message will come from real gateways interfacing with this middleman software.

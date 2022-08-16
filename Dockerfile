@@ -11,8 +11,8 @@ ENV PATH="/usr/bin:${PATH}"
 
 # Specify Middleman Environment Variables
 ENV middleman_port=1681
-ENV middleman_tx_adjust='--tx-adjust -15'
-ENV middleman_rx_adjust='--rx-adjust -25'
+ENV middleman_tx_adjust='--tx-adjust -20'
+ENV middleman_rx_adjust='--rx-adjust -30'
 ENV middleman_ENVs="${middleman_tx_adjust} ${middleman_rx_adjust}"
 
 # Service Virtual Environment Variables
@@ -25,7 +25,6 @@ ENV serv_port_down=1680
  #Use "-p 1681:1681/udp" for example at run time instead
 EXPOSE ${middleman_port}:${middleman_port}/udp
 EXPOSE 1681
-EXPOSE 1680
 # Echo Path
 RUN echo ${PATH}
 
