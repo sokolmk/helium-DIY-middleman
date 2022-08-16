@@ -17,7 +17,7 @@ ENV middleman_ENVs="${middleman_tx_adjust} ${middleman_rx_adjust}"
 
 # Service Virtual Environment Variables
 ENV gateway_ID=AA555A0000000000
-ENV server_address="127.0.0.1"
+ENV server_address="helium-miner"
 ENV serv_port_up=1680
 ENV serv_port_down=1680
 
