@@ -118,8 +118,8 @@ class GW2Miner:
                 self.handle_PULL_RESP(msg, addr)
             elif msg['_NAME_'] == messages.MsgPullData.NAME:
                 self.handle_PULL_DATA(msg, addr)
-            else:
-                self.vgw_logger.info(f"received from {addr} {msg['_NAME_']}")
+            #else:
+            #    self.vgw_logger.info(f"received from {addr} {msg['_NAME_']}")
 
 
 
@@ -293,7 +293,7 @@ class GW2Miner:
 
 
 def packet_is_poc_challenge(rxpk: dict):
-    return rxpk.get('size') == 52 and rxpk.get('datr') == 'SF9BW125'
+    return rxpk.get('size') == 52 and (rxpk.get('datr') == 'SF9BW125' or rxpk.get('datr') == 'SF7BW125')
 
 
 def configure_logger(debug=False):
