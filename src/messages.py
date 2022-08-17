@@ -197,7 +197,7 @@ def PULL_RESP2PUSH_DATA(pull_resp, src_mac):
         payload=None
     )
     txpk = pull_resp['data']['txpk']
-    chan = int(round((txpk['freq'] - 868.1) / .2, 0)) + 8
+    chan = FreqToChan(txpk['freq']) # int(round((txpk['freq'] - 868.1) / .3, 0)) + 8
     payload = dict(
         data=txpk['data'],
         size=txpk['size'],
@@ -216,7 +216,26 @@ def PULL_RESP2PUSH_DATA(pull_resp, src_mac):
     return push
 
 
-
+def FreqToChan(freq):
+    if freq==868.1:
+        chan=1
+    elif freq==868.3:
+        chan=2
+    elif freq==868.5:
+        chan=3
+    elif freq==867.1:
+        chan=4
+    elif freq==867.3:
+        chan=5
+    elif freq==867.5:
+        chan=6
+    elif freq==867.7:
+        chan=7
+    elif freq==867.9:
+        chan=8
+    elif freq==868.0:
+        chan=9
+    return chan
 
 def trials():
     payload = dict(
