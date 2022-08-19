@@ -293,7 +293,13 @@ class GW2Miner:
 
 
 def packet_is_poc_challenge(rxpk: dict):
-    return rxpk.get('size') == 52 and (rxpk.get('datr') == 'SF9BW125' or rxpk.get('datr') == 'SF7BW125' or rxpk.get('datr') == 'SF12BW125')
+    return rxpk.get('size') >= 50 and rxpk.get('size') <= 54 
+    (rxpk.get('datr') == 'SF7BW125' 
+    or rxpk.get('datr') == 'SF8BW125'
+    or rxpk.get('datr') == 'SF9BW125'
+    or rxpk.get('datr') == 'SF10BW125'
+    or rxpk.get('datr') == 'SF11BW125' 
+    or rxpk.get('datr') == 'SF12BW125')
 
 
 def configure_logger(debug=False):
