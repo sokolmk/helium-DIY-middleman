@@ -1,9 +1,9 @@
 #https://github.com/curiousfokker/helium-DIY-middleman.git
 FROM ubuntu:latest
 
-LABEL org.opencontainers.image.source="https://github.com/sblanchard/helium-DIY-middleman"
+LABEL org.opencontainers.image.source="https://github.com/sokolmk/helium-DIY-middleman"
 LABEL org.opencontainers.image.description="Middleman between LoRa gateways running Semtech packet forwarders and servers ingesting packet forwarder data"
-LABEL org.opencontainers.image.authors="sblanchard"
+LABEL org.opencontainers.image.authors="sokolmk"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV container docker
@@ -11,13 +11,13 @@ ENV PATH="/usr/bin:${PATH}"
 
 # Specify Middleman Environment Variables
 ENV middleman_port=1681
-ENV middleman_tx_adjust='--tx-adjust -20'
-ENV middleman_rx_adjust='--rx-adjust -30'
+ENV middleman_tx_adjust='--tx-adjust 0'
+ENV middleman_rx_adjust='--rx-adjust -10'
 ENV middleman_ENVs="${middleman_tx_adjust} ${middleman_rx_adjust}"
 
 # Service Virtual Environment Variables
-ENV gateway_ID=AA555A0000000000
-ENV server_address="helium-miner"
+ENV gateway_ID=A8404121D8E84150
+ENV server_address="localhost"
 ENV serv_port_up=1680
 ENV serv_port_down=1680
 
@@ -38,7 +38,7 @@ RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install --upgrade setuptools
 
 # Install Middle-Man
-RUN git clone https://github.com/sblanchard/helium-DIY-middleman.git
+RUN git clone https://github.com/sokolmk/helium-DIY-middleman.git
 RUN cd /helium-DIY-middleman && make install
 RUN rm /home/middleman/configs/*.example > /dev/null
 
