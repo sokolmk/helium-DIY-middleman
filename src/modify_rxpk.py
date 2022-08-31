@@ -17,8 +17,8 @@ import datetime as dt
 
 class RXMetadataModification:
     def __init__(self, rx_adjust):
-        self.min_rssi = -120
-        self.max_rssi = -90  # valid to 50 miles via FSPL filter
+        self.min_rssi = -138
+        self.max_rssi = -100  # valid to 50 miles via FSPL filter
         self.max_snr = 1.9
         self.min_snr = -9.9
         self.tmst_offset = 0
@@ -32,7 +32,7 @@ class RXMetadataModification:
         :return: object with metadata modified
         """
 
-        old_snr, old_rssi, old_ts = rxpk['lsnr'], rxpk['rssi'], rxpk['tmst']
+        old_snr, old_rssi, old_rssis, old_ts = rxpk['lsnr'], rxpk['rssi'], rxpk['rssis'], rxpk['tmst']
         
         # Simple RSSI level adjustment
         rxpk['rssi'] += self.rx_adjust
@@ -71,6 +71,9 @@ class RXMetadataModification:
             tmst_offset = (rxpk['tmst'] - elapsed_us_u32 + 2**32) % 2**32
             #  print(f"updated tmst_offset from:{self.tmst_offset} to {tmst_offset} (error: {self.tmst_offset - tmst_offset})")
             self.tmst_offset = tmst_offset
-        self.logger.debug(f"modified packet from GW {src_mac[-8:]} to vGW {dest_mac[-8:]}, rssi:{old_rssi}->{rxpk['rssi']}, lsnr:{old_snr}->{rxpk['lsnr']:.1f}, tmst:{old_ts}->{rxpk['tmst']} {'GPS SYNC' if gps_valid else ''}")
+        self.logger.debug(f"modified packet from GW {src_mac[-8:]} to vGW {dest_mac[-8:]}, rssi:{old_rssi}->{rxpk['rssi']},  rssis:{old_rssis}->{rxpk['rssis']}, lsnr:{old_snr}->{rxpk['lsnr']:.1f}, tmst:{old_ts}->{rxpk['tmst']} {'GPS SYNC' if gps_valid else ''}")
+        offset = random.randint(-2, 2)
+        rxpk['rssi'] += offset
+        rxpk['rssis'] += offset
         return rxpk
 
