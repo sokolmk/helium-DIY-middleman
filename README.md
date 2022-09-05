@@ -18,7 +18,7 @@ These instructions are for running it automatically with `systemd`.
 
 Clone this repository onto the machine running your miner. 
 
-    git clone https://github.com/curiousfokker/helium-DIY-middleman.git
+    git clone https://github.com/sokolmk/helium-DIY-middleman.git
  
  The only dependency is Python 3.7+ (developed and tested on 3.8.2)
     
